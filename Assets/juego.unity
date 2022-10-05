@@ -1046,18 +1046,14 @@ MonoBehaviour:
   selectedUnit: {fileID: 681231024}
   tileTypes:
   - name: Grassland
-    tileVisualPrefab: {fileID: 130280, guid: da498279432b2a4419be2c8d1b7f28d0, type: 3}
+    tileVisualPrefab: {fileID: 5637079732111792657, guid: 1769afcdf5f614f4282e94c4a5b716f2, type: 3}
     isWalkable: 1
     movementCost: 1
   - name: Swamp
-    tileVisualPrefab: {fileID: 193080, guid: a2e96876024ae334bb3887303c8de8e2, type: 3}
+    tileVisualPrefab: {fileID: 5637079732111792657, guid: c2a3f5e8bac38244bb96b1fcaf92c02a, type: 3}
     isWalkable: 1
     movementCost: 2
   - name: Mountain
-    tileVisualPrefab: {fileID: 173604, guid: 32558fe0c8e6d4a468030565bc13b8f0, type: 3}
-    isWalkable: 0
-    movementCost: 1
-  - name: marker
-    tileVisualPrefab: {fileID: 193080, guid: 56b72859343d6e84b86bef4078193617, type: 3}
+    tileVisualPrefab: {fileID: 5637079732111792657, guid: 48df6fb1dd0f00d4cb11a0aeaabd3b75, type: 3}
     isWalkable: 0
     movementCost: 1
