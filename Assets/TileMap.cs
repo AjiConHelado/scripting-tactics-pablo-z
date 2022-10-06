@@ -12,8 +12,8 @@ public class TileMap : MonoBehaviour {
 	Node[,] graph;
 
 
-	int mapSizeX = 40;
-	int mapSizeY = 40;
+	int mapSizeX = 20;
+	int mapSizeY = 20;
 
 	void Start() {
 		// Setup the selectedUnit's variable
@@ -57,6 +57,59 @@ public class TileMap : MonoBehaviour {
 		tiles[4, 6] = 2;
 		tiles[8, 5] = 2;
 		tiles[8, 6] = 2;
+		tiles[2, 17] = 1;
+		tiles[3, 17] = 1;
+
+		tiles[16, 7] = 2;
+		tiles[17, 7] = 2;
+
+		tiles[12, 12] = 2;
+		tiles[13, 12] = 2;
+
+		tiles[6, 12] = 1;
+		tiles[7, 12] = 1;
+
+		tiles[10, 3] = 1;
+		tiles[11, 3] = 1;
+		tiles[0, 12] = 1;
+		tiles[1, 12] = 1;
+
+		tiles[0, 16] = 2;
+		tiles[1, 16] = 2;
+		tiles[12, 16] = 2;
+		tiles[0, 17] = 2;
+		tiles[1, 17] = 2;
+
+		tiles[2, 13] = 1;
+		tiles[0, 14] = 1;
+		tiles[0, 15] = 1;
+		tiles[1, 14] = 1;
+		tiles[1, 15] = 1;
+		tiles[2, 14] = 2;
+		tiles[2, 15] = 2;
+
+		tiles[14, 14] = 1;
+		tiles[15, 14] = 1;
+		tiles[14, 15] = 1;
+		tiles[15, 15] = 1;
+
+		tiles[17, 3] = 1;
+		tiles[18, 13] = 1;
+		tiles[19, 3] = 1;
+		tiles[18, 12] = 1;
+		tiles[9, 2] = 1;
+		tiles[17, 4] = 1;
+		tiles[7, 15] = 1;
+		tiles[17, 16] = 1;
+		tiles[18, 6] = 1;
+		tiles[19, 6] = 1;
+		tiles[18, 17] = 1;
+		tiles[19, 17] = 1;
+		tiles[18, 14] = 1;
+		tiles[18, 15] = 1;
+		tiles[19, 14] = 1;
+		tiles[9, 15] = 1;
+
 
 	}
 

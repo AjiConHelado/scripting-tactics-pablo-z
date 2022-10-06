@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class Node {
 	public List<Node> neighbours;
@@ -15,10 +16,7 @@ public class Node {
 			Debug.LogError("WTF?");
 		}
 		
-		return Vector2.Distance(
-			new Vector2(x, y),
-			new Vector2(n.x, n.y)
-			);
+		return Vector2.Distance(new Vector2(x, y),new Vector2(n.x, n.y));
 	}
 	
 }
