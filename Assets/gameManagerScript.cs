@@ -42,7 +42,7 @@ public class gameManagerScript : MonoBehaviour
     public GameObject tileBeingDisplayed;
     public bool displayingUnitInfo;
 
-    public TileMap TM;
+    public TileMap TMS;
 
     //Cursor Info for tileMapScript
     public int cursorX;
@@ -80,7 +80,7 @@ public class gameManagerScript : MonoBehaviour
         unitPathToCursor = new List<Node>();
         unitPathExists = false;       
       
-        TM = GetComponent<TileMap>();
+        TMS = GetComponent<TileMap>();
 
         
     }
@@ -95,18 +95,18 @@ public class gameManagerScript : MonoBehaviour
             cursorUIUpdate();
             unitUIUpdate();
             //If the unit is selected we want to highlight the current path with the UI
-            if (TM.selectedUnit != null && TM.selectedUnit.GetComponent<Unit>().getMovementStateEnum(1) == TM.selectedUnit.GetComponent<Unit>().unitMoveState)
+            if (TMS.selectedUnit != null && TMS.selectedUnit.GetComponent<Unit>().getMovementStateEnum(1) == TMS.selectedUnit.GetComponent<Unit>().unitMoveState)
             {
                 //Check to see if the cursor is in range, we cant show movement outside of range so there is no point if its outside
-                if (TM.selectedUnitMoveRange.Contains(TM.graph[cursorX, cursorY]))
+                if (TMS.selectedUnitMoveRange.Contains(TMS.graph[cursorX, cursorY]))
                 {
                     //Generate new path to cursor try to limit this to once per new cursor location or else its too many calculations
                     
 
                     
-                    if (cursorX != TM.selectedUnit.GetComponent<Unit>().x || cursorY != TM.selectedUnit.GetComponent<Unit>().y)
+                    if (cursorX != TMS.selectedUnit.GetComponent<Unit>().x || cursorY != TMS.selectedUnit.GetComponent<Unit>().y)
                     {
-                        if (!unitPathExists&&TM.selectedUnit.GetComponent<Unit>().movementQueue.Count==0)
+                        if (!unitPathExists&&TMS.selectedUnit.GetComponent<Unit>().movementQueue.Count==0)
                         {
                            
                             unitPathToCursor = generateCursorRouteTo(cursorX, cursorY);
@@ -124,7 +124,7 @@ public class gameManagerScript : MonoBehaviour
 
                                     if (i == 0)
                                     {
-                                        GameObject quadToUpdate = TM.quadOnMapForUnitMovementDisplay[nodeX, nodeY];
+                                        GameObject quadToUpdate = TMS.quadOnMapForUnitMovementDisplay[nodeX, nodeY];
                                         quadToUpdate.GetComponent<Renderer>().material = UICursor;
                                     }
                                     else if (i!=0 && (i+1)!=unitPathToCursor.Count)
@@ -138,7 +138,7 @@ public class gameManagerScript : MonoBehaviour
                                         setCorrectRouteFinalTile(nodeX, nodeY, i);
                                     }
                                     
-                                    TM.quadOnMapForUnitMovementDisplay[nodeX, nodeY].GetComponent<Renderer>().enabled = true;
+                                    TMS.quadOnMapForUnitMovementDisplay[nodeX, nodeY].GetComponent<Renderer>().enabled = true;
                                    
                                 }
                                     
@@ -157,17 +157,17 @@ public class gameManagerScript : MonoBehaviour
                                     int nodeX = unitPathToCursor[i].x;
                                     int nodeY = unitPathToCursor[i].y;
 
-                                    TM.quadOnMapForUnitMovementDisplay[nodeX, nodeY].GetComponent<Renderer>().enabled = false;
+                                    TMS.quadOnMapForUnitMovementDisplay[nodeX, nodeY].GetComponent<Renderer>().enabled = false;
                                 }
                             }
                             
                             unitPathExists = false;
                         }
                     }
-                    else if(cursorX == TM.selectedUnit.GetComponent<Unit>().x && cursorY == TM.selectedUnit.GetComponent<Unit>().y)
+                    else if(cursorX == TMS.selectedUnit.GetComponent<Unit>().x && cursorY == TMS.selectedUnit.GetComponent<Unit>().y)
                     {
                         
-                        TM.disableUnitUIRoute();
+                        TMS.disableUnitUIRoute();
                         unitPathExists = false;
                     }
                     
@@ -233,7 +233,7 @@ public class gameManagerScript : MonoBehaviour
     public void endTurn()
     {
         
-        if (TM.selectedUnit == null)
+        if (TMS.selectedUnit == null)
         {
             switchCurrentPlayer();
             if (currentTeam == 1)
@@ -276,7 +276,7 @@ public class gameManagerScript : MonoBehaviour
                 selectedYTile = hit.transform.gameObject.GetComponent<ClickableTileScript>().tileY;
                 cursorX = selectedXTile;
                 cursorY = selectedYTile;
-                TM.quadOnMapCursor[selectedXTile, selectedYTile].GetComponent<MeshRenderer>().enabled = true;
+                TMS.quadOnMapCursor[selectedXTile, selectedYTile].GetComponent<MeshRenderer>().enabled = true;
                 tileBeingDisplayed = hit.transform.gameObject;
                 
             }
@@ -284,13 +284,13 @@ public class gameManagerScript : MonoBehaviour
             {
                 selectedXTile = tileBeingDisplayed.GetComponent<ClickableTileScript>().tileX;
                 selectedYTile = tileBeingDisplayed.GetComponent<ClickableTileScript>().tileY;
-                TM.quadOnMapCursor[selectedXTile, selectedYTile].GetComponent<MeshRenderer>().enabled = false;
+                TMS.quadOnMapCursor[selectedXTile, selectedYTile].GetComponent<MeshRenderer>().enabled = false;
 
                 selectedXTile = hit.transform.gameObject.GetComponent<ClickableTileScript>().tileX;
                 selectedYTile = hit.transform.gameObject.GetComponent<ClickableTileScript>().tileY;
                 cursorX = selectedXTile;
                 cursorY = selectedYTile;
-                TM.quadOnMapCursor[selectedXTile, selectedYTile].GetComponent<MeshRenderer>().enabled = true;
+                TMS.quadOnMapCursor[selectedXTile, selectedYTile].GetComponent<MeshRenderer>().enabled = true;
                 tileBeingDisplayed = hit.transform.gameObject;
                 
             }
@@ -305,7 +305,7 @@ public class gameManagerScript : MonoBehaviour
                 selectedYTile = hit.transform.parent.gameObject.GetComponent<Unit>().y;
                 cursorX = selectedXTile;
                 cursorY = selectedYTile;
-                TM.quadOnMapCursor[selectedXTile, selectedYTile].GetComponent<MeshRenderer>().enabled = true;
+                TMS.quadOnMapCursor[selectedXTile, selectedYTile].GetComponent<MeshRenderer>().enabled = true;
                 tileBeingDisplayed = hit.transform.parent.gameObject.GetComponent<Unit>().tileBeingOccupied;
 
             }
@@ -315,13 +315,13 @@ public class gameManagerScript : MonoBehaviour
                 {
                     selectedXTile = tileBeingDisplayed.GetComponent<ClickableTileScript>().tileX;
                     selectedYTile = tileBeingDisplayed.GetComponent<ClickableTileScript>().tileY;
-                    TM.quadOnMapCursor[selectedXTile, selectedYTile].GetComponent<MeshRenderer>().enabled = false;
+                    TMS.quadOnMapCursor[selectedXTile, selectedYTile].GetComponent<MeshRenderer>().enabled = false;
 
                     selectedXTile = hit.transform.parent.gameObject.GetComponent<Unit>().x;
                     selectedYTile = hit.transform.parent.gameObject.GetComponent<Unit>().y;
                     cursorX = selectedXTile;
                     cursorY = selectedYTile;
-                    TM.quadOnMapCursor[selectedXTile, selectedYTile].GetComponent<MeshRenderer>().enabled = true;
+                    TMS.quadOnMapCursor[selectedXTile, selectedYTile].GetComponent<MeshRenderer>().enabled = true;
                     tileBeingDisplayed = hit.transform.parent.GetComponent<Unit>().tileBeingOccupied;
                    
                 }
@@ -331,7 +331,7 @@ public class gameManagerScript : MonoBehaviour
         //We aren't pointing at anything no cursor.
         else
         {
-            TM.quadOnMapCursor[selectedXTile, selectedYTile].GetComponent<MeshRenderer>().enabled = false;
+            TMS.quadOnMapCursor[selectedXTile, selectedYTile].GetComponent<MeshRenderer>().enabled = false;
         }
     }
 
@@ -433,7 +433,7 @@ public class gameManagerScript : MonoBehaviour
     public List<Node> generateCursorRouteTo(int x, int y)
     {
 
-        if (TM.selectedUnit.GetComponent<Unit>().x == x && TM.selectedUnit.GetComponent<Unit>().y == y)
+        if (TMS.selectedUnit.GetComponent<Unit>().x == x && TMS.selectedUnit.GetComponent<Unit>().y == y)
         {
             Debug.Log("clicked the same tile that the unit is standing on");
             currentPathForUnitRoute = new List<Node>();
@@ -441,7 +441,7 @@ public class gameManagerScript : MonoBehaviour
 
             return currentPathForUnitRoute;
         }
-        if (TM.unitCanEnterTile(x, y) == false)
+        if (TMS.unitCanEnterTile(x, y) == false)
         {
             //cant move into something so we can probably just return
             //cant set this endpoint as our goal
@@ -454,15 +454,15 @@ public class gameManagerScript : MonoBehaviour
         //from wiki dijkstra's
         Dictionary<Node, float> dist = new Dictionary<Node, float>();
         Dictionary<Node, Node> prev = new Dictionary<Node, Node>();
-        Node source = TM.graph[TM.selectedUnit.GetComponent<Unit>().x, TM.selectedUnit.GetComponent<Unit>().y];
-        Node target = TM.graph[x, y];
+        Node source = TMS.graph[TMS.selectedUnit.GetComponent<Unit>().x, TMS.selectedUnit.GetComponent<Unit>().y];
+        Node target = TMS.graph[x, y];
         dist[source] = 0;
         prev[source] = null;
         //Unchecked nodes
         List<Node> unvisited = new List<Node>();
 
         //Initialize
-        foreach (Node n in TM.graph)
+        foreach (Node n in TMS.graph)
         {
 
             //Initialize to infite distance as we don't know the answer
@@ -499,7 +499,7 @@ public class gameManagerScript : MonoBehaviour
             {
 
                 //float alt = dist[u] + u.DistanceTo(n);
-                float alt = dist[u] + TM.costToEnterTile(n.x, n.y);
+                float alt = dist[u] + TMS.costToEnterTile(n.x, n.y);
                 if (alt < dist[n])
                 {
                     dist[n] = alt;
@@ -546,7 +546,7 @@ public class gameManagerScript : MonoBehaviour
     //Desc: the quad is rotated approriately
     public void UIunitRouteArrowDisplay(Vector2 cursorPos,Vector3 arrowRotationVector)
     {
-        GameObject quadToManipulate = TM.quadOnMapForUnitMovementDisplay[(int)cursorPos.x, (int)cursorPos.y];
+        GameObject quadToManipulate = TMS.quadOnMapForUnitMovementDisplay[(int)cursorPos.x, (int)cursorPos.y];
         quadToManipulate.transform.eulerAngles = arrowRotationVector;
         quadToManipulate.GetComponent<Renderer>().material = UIunitRouteArrow;
         quadToManipulate.GetComponent<Renderer>().enabled = true;
@@ -601,7 +601,7 @@ public class gameManagerScript : MonoBehaviour
         if (backToCurrentVector == Vector2.right && currentToFrontVector == Vector2.right)
         {
             //Debug.Log("[IN[R]]->[Out[R]]");
-            GameObject quadToUpdate = TM.quadOnMapForUnitMovementDisplay[nodeX, nodeY];
+            GameObject quadToUpdate = TMS.quadOnMapForUnitMovementDisplay[nodeX, nodeY];
             quadToUpdate.GetComponent<Transform>().rotation = Quaternion.Euler(90, 0, 270);
             quadToUpdate.GetComponent<Renderer>().material = UIunitRoute;
             quadToUpdate.GetComponent<Renderer>().enabled = true;
@@ -609,7 +609,7 @@ public class gameManagerScript : MonoBehaviour
         else if (backToCurrentVector == Vector2.right && currentToFrontVector == Vector2.up)
         {
             //Debug.Log("[IN[R]]->[Out[UP]]");
-            GameObject quadToUpdate = TM.quadOnMapForUnitMovementDisplay[nodeX, nodeY];
+            GameObject quadToUpdate = TMS.quadOnMapForUnitMovementDisplay[nodeX, nodeY];
             quadToUpdate.GetComponent<Transform>().rotation = Quaternion.Euler(90, 0, 180);
             quadToUpdate.GetComponent<Renderer>().material = UIunitRouteCurve;
             quadToUpdate.GetComponent<Renderer>().enabled = true;
@@ -618,7 +618,7 @@ public class gameManagerScript : MonoBehaviour
         else if (backToCurrentVector == Vector2.right && currentToFrontVector == Vector2.down)
         {
             //Debug.Log("[IN[R]]->[Out[DOWN]]");
-            GameObject quadToUpdate = TM.quadOnMapForUnitMovementDisplay[nodeX, nodeY];
+            GameObject quadToUpdate = TMS.quadOnMapForUnitMovementDisplay[nodeX, nodeY];
             quadToUpdate.GetComponent<Transform>().rotation = Quaternion.Euler(90, 0, 270);
             quadToUpdate.GetComponent<Renderer>().material = UIunitRouteCurve;
             quadToUpdate.GetComponent<Renderer>().enabled = true;
@@ -627,7 +627,7 @@ public class gameManagerScript : MonoBehaviour
         else if (backToCurrentVector == Vector2.left && currentToFrontVector == Vector2.left)
         {
             //Debug.Log("[IN[L]]->[Out[L]]");
-            GameObject quadToUpdate = TM.quadOnMapForUnitMovementDisplay[nodeX, nodeY];
+            GameObject quadToUpdate = TMS.quadOnMapForUnitMovementDisplay[nodeX, nodeY];
             quadToUpdate.GetComponent<Transform>().rotation = Quaternion.Euler(90, 0, 90);
             quadToUpdate.GetComponent<Renderer>().material = UIunitRoute;
             quadToUpdate.GetComponent<Renderer>().enabled = true;
@@ -635,7 +635,7 @@ public class gameManagerScript : MonoBehaviour
         else if (backToCurrentVector == Vector2.left && currentToFrontVector == Vector2.up)
         {
             //Debug.Log("[IN[L]]->[Out[UP]]");
-            GameObject quadToUpdate = TM.quadOnMapForUnitMovementDisplay[nodeX, nodeY];
+            GameObject quadToUpdate = TMS.quadOnMapForUnitMovementDisplay[nodeX, nodeY];
             quadToUpdate.GetComponent<Transform>().rotation = Quaternion.Euler(90, 0, 90);
             quadToUpdate.GetComponent<Renderer>().material = UIunitRouteCurve;
             quadToUpdate.GetComponent<Renderer>().enabled = true;
@@ -643,7 +643,7 @@ public class gameManagerScript : MonoBehaviour
         else if (backToCurrentVector == Vector2.left && currentToFrontVector == Vector2.down)
         {
             //Debug.Log("[IN[L]]->[Out[DOWN]]");
-            GameObject quadToUpdate = TM.quadOnMapForUnitMovementDisplay[nodeX, nodeY];
+            GameObject quadToUpdate = TMS.quadOnMapForUnitMovementDisplay[nodeX, nodeY];
             quadToUpdate.GetComponent<Transform>().rotation = Quaternion.Euler(90, 0, 0);
             quadToUpdate.GetComponent<Renderer>().material = UIunitRouteCurve;
             quadToUpdate.GetComponent<Renderer>().enabled = true;
@@ -652,7 +652,7 @@ public class gameManagerScript : MonoBehaviour
         else if (backToCurrentVector == Vector2.up && currentToFrontVector == Vector2.up)
         {
             //Debug.Log("[IN[UP]]->[Out[UP]]");
-            GameObject quadToUpdate = TM.quadOnMapForUnitMovementDisplay[nodeX, nodeY];
+            GameObject quadToUpdate = TMS.quadOnMapForUnitMovementDisplay[nodeX, nodeY];
             quadToUpdate.GetComponent<Transform>().rotation = Quaternion.Euler(90, 0, 0);
             quadToUpdate.GetComponent<Renderer>().material = UIunitRoute;
             quadToUpdate.GetComponent<Renderer>().enabled = true;
@@ -660,7 +660,7 @@ public class gameManagerScript : MonoBehaviour
         else if (backToCurrentVector == Vector2.up && currentToFrontVector == Vector2.right)
         {
             //Debug.Log("[IN[UP]]->[Out[R]]");
-            GameObject quadToUpdate = TM.quadOnMapForUnitMovementDisplay[nodeX, nodeY];
+            GameObject quadToUpdate = TMS.quadOnMapForUnitMovementDisplay[nodeX, nodeY];
             quadToUpdate.GetComponent<Transform>().rotation = Quaternion.Euler(90, 0, 0);
             quadToUpdate.GetComponent<Renderer>().material = UIunitRouteCurve;
             quadToUpdate.GetComponent<Renderer>().enabled = true;
@@ -668,7 +668,7 @@ public class gameManagerScript : MonoBehaviour
         else if (backToCurrentVector == Vector2.up && currentToFrontVector == Vector2.left)
         {
             //Debug.Log("[IN[UP]]->[Out[L]]");
-            GameObject quadToUpdate = TM.quadOnMapForUnitMovementDisplay[nodeX, nodeY];
+            GameObject quadToUpdate = TMS.quadOnMapForUnitMovementDisplay[nodeX, nodeY];
             quadToUpdate.GetComponent<Transform>().rotation = Quaternion.Euler(90, 0, 270);
             quadToUpdate.GetComponent<Renderer>().material = UIunitRouteCurve;
             quadToUpdate.GetComponent<Renderer>().enabled = true;
@@ -677,7 +677,7 @@ public class gameManagerScript : MonoBehaviour
         else if (backToCurrentVector == Vector2.down && currentToFrontVector == Vector2.down)
         {
             //Debug.Log("[IN[DOWN]]->[Out[DOWN]]");
-            GameObject quadToUpdate = TM.quadOnMapForUnitMovementDisplay[nodeX, nodeY];
+            GameObject quadToUpdate = TMS.quadOnMapForUnitMovementDisplay[nodeX, nodeY];
             quadToUpdate.GetComponent<Transform>().rotation = Quaternion.Euler(90, 0, 0);
             quadToUpdate.GetComponent<Renderer>().material = UIunitRoute;
             quadToUpdate.GetComponent<Renderer>().enabled = true;
@@ -685,7 +685,7 @@ public class gameManagerScript : MonoBehaviour
         else if (backToCurrentVector == Vector2.down && currentToFrontVector == Vector2.right)
         {
             //Debug.Log("[IN[DOWN]]->[Out[R]]");
-            GameObject quadToUpdate = TM.quadOnMapForUnitMovementDisplay[nodeX, nodeY];
+            GameObject quadToUpdate = TMS.quadOnMapForUnitMovementDisplay[nodeX, nodeY];
             quadToUpdate.GetComponent<Transform>().rotation = Quaternion.Euler(90, 0, 90);
             quadToUpdate.GetComponent<Renderer>().material = UIunitRouteCurve;
             quadToUpdate.GetComponent<Renderer>().enabled = true;
@@ -694,7 +694,7 @@ public class gameManagerScript : MonoBehaviour
         else if (backToCurrentVector == Vector2.down && currentToFrontVector == Vector2.left)
         {
             //Debug.Log("[IN[DOWN]]->[Out[L]]");
-            GameObject quadToUpdate = TM.quadOnMapForUnitMovementDisplay[nodeX, nodeY];
+            GameObject quadToUpdate = TMS.quadOnMapForUnitMovementDisplay[nodeX, nodeY];
             quadToUpdate.GetComponent<Transform>().rotation = Quaternion.Euler(90, 0, 180);
             quadToUpdate.GetComponent<Renderer>().material = UIunitRouteCurve;
             quadToUpdate.GetComponent<Renderer>().enabled = true;
@@ -713,7 +713,7 @@ public class gameManagerScript : MonoBehaviour
         if (backToCurrentVector == Vector2.right)
         {
             //Debug.Log("[IN[R]]");
-            GameObject quadToUpdate = TM.quadOnMapForUnitMovementDisplay[nodeX, nodeY];
+            GameObject quadToUpdate = TMS.quadOnMapForUnitMovementDisplay[nodeX, nodeY];
             quadToUpdate.GetComponent<Transform>().rotation = Quaternion.Euler(90, 0, 270);
             quadToUpdate.GetComponent<Renderer>().material = UIunitRouteArrow;
             quadToUpdate.GetComponent<Renderer>().enabled = true;
@@ -721,7 +721,7 @@ public class gameManagerScript : MonoBehaviour
         else if (backToCurrentVector == Vector2.left)
         {
             //Debug.Log("[IN[L]]");
-            GameObject quadToUpdate = TM.quadOnMapForUnitMovementDisplay[nodeX, nodeY];
+            GameObject quadToUpdate = TMS.quadOnMapForUnitMovementDisplay[nodeX, nodeY];
             quadToUpdate.GetComponent<Transform>().rotation = Quaternion.Euler(90, 0, 90);
             quadToUpdate.GetComponent<Renderer>().material = UIunitRouteArrow;
             quadToUpdate.GetComponent<Renderer>().enabled = true;
@@ -730,7 +730,7 @@ public class gameManagerScript : MonoBehaviour
         else if (backToCurrentVector == Vector2.up)
         {
             //Debug.Log("[IN[U]]");
-            GameObject quadToUpdate = TM.quadOnMapForUnitMovementDisplay[nodeX, nodeY];
+            GameObject quadToUpdate = TMS.quadOnMapForUnitMovementDisplay[nodeX, nodeY];
             quadToUpdate.GetComponent<Transform>().rotation = Quaternion.Euler(90, 0, 0);
             quadToUpdate.GetComponent<Renderer>().material = UIunitRouteArrow;
             quadToUpdate.GetComponent<Renderer>().enabled = true;
@@ -738,7 +738,7 @@ public class gameManagerScript : MonoBehaviour
         else if (backToCurrentVector == Vector2.down)
         {
             //Debug.Log("[IN[D]]");
-            GameObject quadToUpdate = TM.quadOnMapForUnitMovementDisplay[nodeX, nodeY];
+            GameObject quadToUpdate = TMS.quadOnMapForUnitMovementDisplay[nodeX, nodeY];
             quadToUpdate.GetComponent<Transform>().rotation = Quaternion.Euler(90, 0, 180);
             quadToUpdate.GetComponent<Renderer>().material = UIunitRouteArrow;
             quadToUpdate.GetComponent<Renderer>().enabled = true;

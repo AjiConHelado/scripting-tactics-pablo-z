@@ -175,7 +175,7 @@ public class TileMap : MonoBehaviour
         {
             for (int y = 0; y < mapSizeY; y++)
             {
-                tiles[x, y] = 0;
+                tiles[x, y] = 1;
             }
         }
         tiles[2, 7] = 2;

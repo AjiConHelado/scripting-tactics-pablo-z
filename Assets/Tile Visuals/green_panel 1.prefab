@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -4547319238367140499}
   m_Layer: 0
   m_Name: green_panel 1
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,6 +101,7 @@ MonoBehaviour:
   tileX: 0
   tileY: 0
   map: {fileID: 0}
+  unitOnTile: {fileID: 0}
 --- !u!65 &-4547319238367140499
 BoxCollider:
   m_ObjectHideFlags: 0
