@@ -24,10 +24,10 @@ public class battleManagerScript : MonoBehaviour
         int initiatorAtt = initiatorUnit.attackDamage;
         int recipientAtt = recipientUnit.attackDamage;
         //If the two units have the same attackRange then they can trade
-        if (initiatorUnit.attackRange == recipientUnit.attackRange)
+        /*if (initiatorUnit.attackRange == recipientUnit.attackRange)
         {
-            GameObject tempParticle = Instantiate( recipientUnit.GetComponent<Unit>().damagedParticle,recipient.transform.position, recipient.transform.rotation);
-            Destroy(tempParticle, 2f);
+            //GameObject tempParticle = Instantiate( recipientUnit.GetComponent<Unit>().damagedParticle,recipient.transform.position, recipient.transform.rotation);
+            //Destroy(tempParticle, 2f);
             recipientUnit.dealDamage(initiatorAtt);
             if (checkIfDead(recipient))
             {
@@ -53,11 +53,12 @@ public class battleManagerScript : MonoBehaviour
 
             }
         }
+        */
         //if the units don't have the same attack range, like a swordsman vs an archer; the recipient cannot strike back
-        else
+        //else
         {
-            GameObject tempParticle = Instantiate(recipientUnit.GetComponent<Unit>().damagedParticle, recipient.transform.position, recipient.transform.rotation);
-            Destroy(tempParticle, 2f);
+            //GameObject tempParticle = Instantiate(recipientUnit.GetComponent<Unit>().damagedParticle, recipient.transform.position, recipient.transform.rotation);
+           // Destroy(tempParticle, 2f);
            
             recipientUnit.dealDamage(initiatorAtt);
             if (checkIfDead(recipient))
@@ -104,7 +105,7 @@ public class battleManagerScript : MonoBehaviour
         float elapsedTime = 0;
         Vector3 startingPos = unit.transform.position;
         Vector3 endingPos = enemy.transform.position;
-        unit.GetComponent<Unit>().setWalkingAnimation();
+       // unit.GetComponent<Unit>().setWalkingAnimation();
         while (elapsedTime < .25f)
         {
            
@@ -166,7 +167,7 @@ public class battleManagerScript : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         
-        unit.GetComponent<Unit>().setWaitIdleAnimation();
+        //unit.GetComponent<Unit>().setWaitIdleAnimation();
         unit.GetComponent<Unit>().wait();
        
         

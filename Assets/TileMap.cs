@@ -123,7 +123,7 @@ public class TileMap : MonoBehaviour
                     unitSelectedPreviousX = selectedUnit.GetComponent<Unit>().x;
                     unitSelectedPreviousY = selectedUnit.GetComponent<Unit>().y;
                     previousOccupiedTile = selectedUnit.GetComponent<Unit>().tileBeingOccupied;
-                    selectedUnit.GetComponent<Unit>().setWalkingAnimation();
+                   // selectedUnit.GetComponent<Unit>().setWalkingAnimation();
                     moveUnit();
 
                     StartCoroutine(moveUnitAndFinalize());
@@ -150,7 +150,7 @@ public class TileMap : MonoBehaviour
                     if (selectedUnit.GetComponent<Unit>().unitMoveState != selectedUnit.GetComponent<Unit>().getMovementStateEnum(3))
                     {
                         //unselectedSound.Play();
-                        selectedUnit.GetComponent<Unit>().setIdleAnimation();
+                        //selectedUnit.GetComponent<Unit>().setIdleAnimation();
                         deselectUnit();
                     }
                 }
@@ -175,7 +175,7 @@ public class TileMap : MonoBehaviour
         {
             for (int y = 0; y < mapSizeY; y++)
             {
-                tiles[x, y] = 1;
+                tiles[x, y] = 0;
             }
         }
         tiles[2, 7] = 2;
@@ -190,46 +190,46 @@ public class TileMap : MonoBehaviour
         tiles[6, 2] = 2;
         tiles[7, 2] = 2;
 
-        tiles[0, 3] = 3;
-        tiles[1, 3] = 3;
-        tiles[0, 2] = 3;
-        tiles[1, 2] = 3;
+        tiles[10, 6] = 1;
+        tiles[11, 4] = 1;
+        tiles[10, 3] = 1;
+        tiles[11, 5] = 1;
 
-        tiles[0, 6] = 3;
-        tiles[1, 6] = 3;
-        tiles[2, 6] = 3;
-        tiles[0, 7] = 3;
-        tiles[1, 7] = 3;
+        tiles[0, 6] = 1;
+        tiles[1, 6] = 1;
+        tiles[2, 6] = 1;
+        tiles[0, 7] = 1;
+        tiles[1, 7] = 1;
 
-        tiles[2, 3] = 3;
+        tiles[2, 3] = 1;
         tiles[0, 4] = 1;
         tiles[0, 5] = 1;
         tiles[1, 4] = 1;
         tiles[1, 5] = 1;
-        tiles[2, 4] = 3;
-        tiles[2, 5] = 3;
+        tiles[2, 4] = 1;
+        tiles[2, 5] = 1;
 
         tiles[4, 4] = 1;
         tiles[5, 4] = 1;
         tiles[4, 5] = 1;
         tiles[5, 5] = 1;
 
-        tiles[7, 3] = 3;
-        tiles[8, 3] = 3;
-        tiles[9, 3] = 3;
-        tiles[8, 2] = 3;
-        tiles[9, 2] = 3;
-        tiles[7, 4] = 3;
-        tiles[7, 5] = 3;
-        tiles[7, 6] = 3;
-        tiles[8, 6] = 3;
-        tiles[9, 6] = 3;
-        tiles[8, 7] = 3;
-        tiles[9, 7] = 3;
-        tiles[8, 4] = 1;
-        tiles[8, 5] = 1;
-        tiles[9, 4] = 1;
-        tiles[9, 5] = 1;
+        tiles[17, 3] = 1;
+        tiles[18, 3] = 1;
+        tiles[19, 3] = 1;
+        tiles[18, 2] = 1;
+        tiles[19, 2] = 1;
+        tiles[17, 4] = 1;
+        tiles[17, 5] = 1;
+        tiles[17, 6] = 1;
+        tiles[18, 6] = 1;
+        tiles[19, 6] = 1;
+        tiles[18, 7] = 1;
+        tiles[19, 7] = 1;
+        tiles[18, 4] = 1;
+        tiles[18, 5] = 1;
+        tiles[19, 4] = 1;
+        tiles[19, 5] = 1;
 
 
 
@@ -611,7 +611,7 @@ public class TileMap : MonoBehaviour
                     selectedUnit = tempSelectedUnit;
                     selectedUnit.GetComponent<Unit>().map = this;
                     selectedUnit.GetComponent<Unit>().setMovementState(1);
-                    selectedUnit.GetComponent<Unit>().setSelectedAnimation();
+                   // selectedUnit.GetComponent<Unit>().setSelectedAnimation();
                     unitSelected = true;
                     highlightUnitRange();
 
@@ -648,7 +648,7 @@ public class TileMap : MonoBehaviour
                         disableHighlightUnitRange();
                         Debug.Log("ITS THE SAME UNIT JUST WAIT");
                         selectedUnit.GetComponent<Unit>().wait();
-                        selectedUnit.GetComponent<Unit>().setWaitIdleAnimation();
+                        //selectedUnit.GetComponent<Unit>().setWaitIdleAnimation();
                         selectedUnit.GetComponent<Unit>().setMovementState(3);
                         deselectUnit();
 
@@ -679,7 +679,7 @@ public class TileMap : MonoBehaviour
                     disableHighlightUnitRange();
                     Debug.Log("ITS THE SAME UNIT JUST WAIT");
                     selectedUnit.GetComponent<Unit>().wait();
-                    selectedUnit.GetComponent<Unit>().setWaitIdleAnimation();
+                    //selectedUnit.GetComponent<Unit>().setWaitIdleAnimation();
                     selectedUnit.GetComponent<Unit>().setMovementState(3);
                     deselectUnit();
 
@@ -1050,7 +1050,7 @@ public class TileMap : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         finalizeMovementPosition();
-        selectedUnit.GetComponent<Unit>().setSelectedAnimation();
+        //selectedUnit.GetComponent<Unit>().setSelectedAnimation();
     }
 
 

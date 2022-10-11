@@ -20,12 +20,12 @@ public class Unit : MonoBehaviour {
     public float visualMovementSpeed = .15f;
 
     //Animator
-    public Animator animator;
+    //public Animator animator;
 
 
     public GameObject tileBeingOccupied;
 
-    public GameObject damagedParticle;
+    //public GameObject damagedParticle;
     //UnitStats
     public string unitName;
     public int moveSpeed = 2;
@@ -89,7 +89,7 @@ public class Unit : MonoBehaviour {
     private void Awake()
     {
 
-        animator = holder2D.GetComponent<Animator>();
+       // animator = holder2D.GetComponent<Animator>();
         movementQueue = new Queue<int>();
         combatQueue = new Queue<int>();
 
@@ -131,7 +131,7 @@ public class Unit : MonoBehaviour {
         setMovementState(0);
         completedMovement = false;
         gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.white;
-        setIdleAnimation();
+       // setIdleAnimation();
         //gameObject.GetComponentInChildren<Renderer>().material = unitMaterial;
     }
     public movementStates getMovementStateEnum(int i)
@@ -324,7 +324,7 @@ public class Unit : MonoBehaviour {
         damagePopupCanvas.enabled = false;
     }
 //animation 
-    public void setSelectedAnimation()
+    /*public void setSelectedAnimation()
     {
 
         animator.SetTrigger("toSelected");
@@ -352,5 +352,6 @@ public class Unit : MonoBehaviour {
     {
         animator.SetTrigger("dieTrigger");
     }
+    */
     //rateado de https://www.youtube.com/watch?v=au6_95iI_gE
 }

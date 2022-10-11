@@ -16,13 +16,13 @@ public class gameManagerScript : MonoBehaviour
     public TMP_Text UIunitAttackDamage;
     public TMP_Text UIunitAttackRange;
     public TMP_Text UIunitMoveSpeed;
-    public TMP_Text UIunitName;
+   
     public UnityEngine.UI.Image UIunitSprite;
 
     public Canvas UIunitCanvas;
-    public GameObject playerPhaseBlock;
-    private Animator playerPhaseAnim;
-    private TMP_Text playerPhaseText;
+    //public GameObject playerPhaseBlock;
+   // private Animator playerPhaseAnim;
+    //private TMP_Text playerPhaseText;
    
     //Raycast for the update for unitHover info
     private Ray ray;
@@ -75,8 +75,8 @@ public class gameManagerScript : MonoBehaviour
         setCurrentTeamUI();
         teamHealthbarColorUpdate();
         displayingUnitInfo = false;
-        playerPhaseAnim = playerPhaseBlock.GetComponent<Animator>();
-        playerPhaseText = playerPhaseBlock.GetComponentInChildren<TextMeshProUGUI>();
+       // playerPhaseAnim = playerPhaseBlock.GetComponent<Animator>();
+       // playerPhaseText = playerPhaseBlock.GetComponentInChildren<TextMeshProUGUI>();
         unitPathToCursor = new List<Node>();
         unitPathExists = false;       
       
@@ -182,7 +182,7 @@ public class gameManagerScript : MonoBehaviour
     //Desc: sets the current player Text in the UI
     public void setCurrentTeamUI()
     {
-        currentTeamUI.SetText("Current Player is : Player " + (currentTeam+1).ToString());
+        currentTeamUI.SetText("JUGADOR: " + (currentTeam+1).ToString());
     }
 
     //In: 
@@ -236,16 +236,16 @@ public class gameManagerScript : MonoBehaviour
         if (TMS.selectedUnit == null)
         {
             switchCurrentPlayer();
-            if (currentTeam == 1)
+           /* if (currentTeam == 1)
             {
-                playerPhaseAnim.SetTrigger("slideLeftTrigger");
+                //playerPhaseAnim.SetTrigger("slideLeftTrigger");
                 playerPhaseText.SetText("Player 2 Phase");
             }
             else if (currentTeam == 0)
             {
-                playerPhaseAnim.SetTrigger("slideRightTrigger");
+                //playerPhaseAnim.SetTrigger("slideRightTrigger");
                 playerPhaseText.SetText("Player 1 Phase");
-            }
+            }*/
             teamHealthbarColorUpdate();
             setCurrentTeamUI();
         }
@@ -354,7 +354,7 @@ public class gameManagerScript : MonoBehaviour
                 UIunitAttackDamage.SetText(highlightedUnitScript.attackDamage.ToString());
                 UIunitAttackRange.SetText(highlightedUnitScript.attackRange.ToString());
                 UIunitMoveSpeed.SetText(highlightedUnitScript.moveSpeed.ToString());
-                UIunitName.SetText(highlightedUnitScript.unitName);
+               // UIunitName.SetText(highlightedUnitScript.unitName);
                 UIunitSprite.sprite = highlightedUnitScript.unitSprite;
                 
             }
@@ -372,7 +372,7 @@ public class gameManagerScript : MonoBehaviour
                     UIunitAttackDamage.SetText(highlightedUnitScript.attackDamage.ToString());
                     UIunitAttackRange.SetText(highlightedUnitScript.attackRange.ToString());
                     UIunitMoveSpeed.SetText(highlightedUnitScript.moveSpeed.ToString());
-                    UIunitName.SetText(highlightedUnitScript.unitName);
+                   // UIunitName.SetText(highlightedUnitScript.unitName);
                     UIunitSprite.sprite = highlightedUnitScript.unitSprite;
 
                 }

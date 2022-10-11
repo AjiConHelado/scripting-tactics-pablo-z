@@ -95,13 +95,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5637079732111792657}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a15b72288dcaa8146bba583bf18da7fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 77d891b9782e0dd4ba8d4a357d815a1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tileX: 0
   tileY: 0
-  map: {fileID: 0}
   unitOnTile: {fileID: 0}
+  map: {fileID: 0}
 --- !u!65 &-4547319238367140499
 BoxCollider:
   m_ObjectHideFlags: 0
